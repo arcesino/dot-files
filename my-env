@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# CUSTOM ENVIRONMENT VARIABLES
+set_custom_env_home() {
+  home_var=$1
+  home_dir=$2
+  [[ -d "${home_dir}" ]] && export "${home_var}"=${home_dir}
+}
+
+set_custom_env_home "GVM_HOME" "$HOME/.gvm"
+set_custom_env_home "RVM_HOME" "$HOME/.rvm"
+
+# EXTRA ENV FILES NOT UPLOADED TO GITHUB
+dot_files_extra_dir=~/dot-files/extra
+[[ -s "${dot_files_extra_dir}" ]] && for f in $dot_files_extra/*-env; do source $f; done
+
+unset dot_files_extra_dir
+unset -f set_custom_env_home

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# CUSTOM SMART ALIASES
+set_custom_alias() {
+  cmd_name=$1
+  cmd_alias=$2
+  cmd_alias_options=$3
+  if type "${cmd_alias}" > /dev/null; then
+    alias ${cmd_name}="${cmd_alias} ${cmd_alias_options}"
+  fi
+}
+
+set_custom_alias "ll" "ls" "-lha"
+set_custom_alias "ssh" "autossh"
+
+# EXTRA RC FILES NOT UPLOADED TO GITHUB
+dot_files_extra_dir=~/dot-files/extra
+[[ -s "${dot_files_extra_dir}" ]] && for f in $dot_files_extra/*-rc; do source $f; done
+
+unset dot_files_extra_dir
+unset -f set_custom_alias
+
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$PATH
+
