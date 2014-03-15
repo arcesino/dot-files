@@ -12,6 +12,9 @@ set_custom_alias() {
 
 set_custom_alias "ll" "ls" "-lhA"
 set_custom_alias "ssh" "autossh"
+alias historyg='history | grep $@'
+alias hsg='history | grep $@'
+alias psg='ps -fea | grep $@'
 
 # EXTRA RC FILES NOT UPLOADED TO GITHUB
 dot_files_rc_dir=~/dot-files/rc
