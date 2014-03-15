@@ -13,10 +13,12 @@ set_custom_env_home "RVM_HOME" "$HOME/.rvm"
 # EXTRA ENV FILES NOT UPLOADED TO GITHUB
 dot_files_env_dir=~/dot-files/env
 if [ -d "$dot_files_env_dir" ]; then
-  env_files=`find $dot_files_env_dir -name "*" -type f -print`
-  for f in $env_files; do source $f; done
+  for f in `ls $dot_files_env_dir`; do
+    env_file="$dot_files_env_dir/$f"
+    if [ -f "$env_file" ]; then source $env_file; fi
+  done
 fi
 
-unset env_files
-unset dot_files_extra_dir
+unset env_file
+unset dot_files_env_dir
 unset -f set_custom_env_home

@@ -10,19 +10,24 @@ set_custom_alias() {
   fi
 }
 
-set_custom_alias "ll" "ls" "-lha"
+set_custom_alias "ll" "ls" "-lhA"
 set_custom_alias "ssh" "autossh"
 
 # EXTRA RC FILES NOT UPLOADED TO GITHUB
 dot_files_rc_dir=~/dot-files/rc
 if [ -d "$dot_files_rc_dir" ]; then
-  rc_files=`find $dot_files_rc_dir -name "*" -type f -print`
-  for f in $rc_files; do source $f; done
+  for f in `ls $dot_files_rc_dir`; do
+    rc_file="$dot_files_rc_dir/$f"
+    if [ -f "$rc_file" ]; then source $rc_file; fi
+  done
 fi
 
-unset rc_files
+unset rc_file
 unset dot_files_rc_dir
 unset -f set_custom_alias
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
 
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
