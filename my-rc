@@ -32,5 +32,16 @@ unset -f set_custom_alias
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
 
-export PATH=~/bin:/usr/local/sbin:/usr/local/bin:$PATH
+export_to_path() {
+  bin_path=$1
+  [[ -d "${bin_path}" ]] && export PATH=${bin_path}:$PATH
+}
+
+npm_bin_pat=h/usr/local/share/npm/bin
+export_to_path "/usr/local/share/npm/bin"
+export_to_path "/usr/local/bin"
+export_to_path "/usr/local/sbin"
+unset -f export_to_path
+
+export PATH=~/bin:$PATH
 
