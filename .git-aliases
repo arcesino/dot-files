@@ -1,0 +1,8 @@
+# Custom aliases
+alias gpp='git pull -p'
+alias gbb='git remote show origin | grep "HEAD branch" | cut -d " " -f 5'
+alias gpf='git push -f'
+alias gcbb='git checkout $(gbb)'
+alias gpbb='git pull origin $(gbb)'
+alias gppr='git push --set-upstream origin $(git branch --show-current)'
+
